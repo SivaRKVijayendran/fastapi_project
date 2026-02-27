@@ -1,14 +1,10 @@
+from sqlalchemy import Column, Integer, String
+from database import Base
 
-from pydantic import BaseModel
+class Book(Base):
+    __tablename__ = "books"
 
-class Book(BaseModel):
-    id : int
-    title : str
-    author : str
-    publish_date : str
-
-
-class Book_update(BaseModel):
-    title : str
-    author : str
-    publish_date : str
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(225))
+    author = Column(String(225))
+    publish_date = Column(String(225))

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query , status
 from fastapi.exceptions import HTTPException
 from typing import Optional
-from model import Book , Book_update
+from model import Book
 
 app = FastAPI()
 
