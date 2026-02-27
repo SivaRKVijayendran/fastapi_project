@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends, status, Query
 from sqlalchemy.orm import Session
 from fastapi.exceptions import HTTPException
-from database import engine, get_db, Base
+from database import  get_db
 from model import Book
 from schema import Bookstore , Book_update
 
-Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
