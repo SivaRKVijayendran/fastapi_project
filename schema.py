@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+
 
 class Bookstore(BaseModel):
     id: int
@@ -6,10 +7,11 @@ class Bookstore(BaseModel):
     author: str
     publish_date: str
 
+    model_config = ConfigDict(from_attributes=True)
+
 class Book_update(BaseModel):
     title: str
     author: str
     publish_date: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
