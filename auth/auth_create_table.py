@@ -1,7 +1,6 @@
-from database import Base, engine
-from model import Book
 from sqlalchemy import inspect
- 
+from auth_database import Base , engine
+import auth_model
 
 print("DB URL : " , engine.url)
 inspection = inspect(engine)

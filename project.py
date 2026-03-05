@@ -75,3 +75,19 @@ def modify_by_id(bid : int ,  bk : Book_update,  db : Session =Depends(get_db)):
     exiting_book_new = db.query(Book).filter(Book.id == bid).first()
 
     return exiting_book_new
+
+@app.delete("/deletebyid/{bid}")
+def delete_by_id(bid: int, db: Session = Depends(get_db)):
+
+    existing_book = db.query(Book).filter(Book.id == bid).first()
+
+    if not existing_book:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Book ID not found"
+        )
+
+    db.delete(existing_book)
+    db.commit()
+
+    return {"message": "Deleted successfully"}
