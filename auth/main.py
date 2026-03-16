@@ -4,11 +4,9 @@ from auth_model import User
 from schema import User_create , change_username , ForgotPasswordRequest , ResetPasswordRequest
 from auth_database import get_db
 from jose import jwt
-from utils import hash_password , ALGORITHM , SECRET_KEY  ,verify_password ,create_access_token
+from utils import hash_password, ALGORITHM, SECRET_KEY, verify_password, create_access_token, create_reset_token
 from fastapi.security import OAuth2PasswordRequestForm , OAuth2PasswordBearer
 from jose import JWTError
-
-
 
 app = FastAPI()
 
@@ -87,6 +85,7 @@ def change_username(update_username : change_username, currect_user : dict = Dep
 
     existing_user = db.query(User).filter(User.id == update_username.id).first()
 
+
     if existing_user is None :
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="User not found")
 
@@ -114,7 +113,7 @@ def forgot_password(data: ForgotPasswordRequest, db: Session = Depends(get_db)):
             detail="User not found"
         )
 
-    reset_token = create_access_token({"sub": user.username})
+    reset_token = create_reset_token({"sub": user.username})
 
     return {"reset_token": reset_token}
 
